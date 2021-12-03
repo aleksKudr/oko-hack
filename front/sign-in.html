@@ -31,10 +31,10 @@
                     <div class="register-left">
                         <div class="register-form">
                             <h3 class="form-title">Добро пожаловать</h3>
-                            <form action="#">
+                            <form id="loginForm" action="http://oko.hack48.ru:8080/login/" method="post">
                                 <div class="form-group">
-                                  <label for="email">Эл. почта</label>
-                                  <input type="email" class="form-control" id="email" name="name" placeholder="johndoe.admin@gmail.com" />
+                                  <label for="username">Эл. почта</label>
+                                  <input type="username" class="form-control" id="email" name="username" placeholder="johndoe.admin@gmail.com" />
                                 </div>
                                 <div class="form-group">
                                   <label for="password-field">Пароль</label>
@@ -60,12 +60,25 @@
                 </div>
             </div>
         </div>
-        
+        <a id="linkIndex" hidden href="index.html"><i class="flaticon-home"></i>Дашборд</a>
 
         <script src="assets/js/jquery-1.11.2.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/plugins.js"></script>
         <script src="assets/js/main.js"></script>
+
+        <script>
+            $("#loginForm").submit(e => {
+                e.preventDefault();
+                const name = $("#email").val();
+                const pass = $("#password-field").val();
+                if (name === "root" && pass === "pass") {
+                    localStorage.setItem("user", name) 
+                    $("#linkIndex")[0].click();
+                }
+                
+            })
+        </script>
     </body>
 </html>

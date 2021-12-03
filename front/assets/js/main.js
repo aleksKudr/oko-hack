@@ -8,6 +8,19 @@
     jQuery(".preloader").fadeOut("slow");
   });
   jQuery(document).ready(function(){
+
+    if (!window.location.pathname.includes("/sign-in.html") ) {
+      const user = localStorage.getItem('user')
+      if (!user) {
+        const a = document.createElement('a');
+        a.title = "";
+        a.href = "sign-in.html";
+        a.hidden = true;
+        a.id = "linkSign"
+        $(".menu-bar").append(a)
+        $("#linkSign")[0].click();
+      }
+    }
     
     /*-------------------------------------------
     js wow active
