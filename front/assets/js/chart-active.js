@@ -97,7 +97,7 @@
      var DiseasesChart = new Chart(ctx, {
      type: 'doughnut',
      data: {
-          labels: ['Stroke', 'Diabetes', 'Cirrhosis', 'Tuberculosis', 'lung cancers'],
+          labels: ['Гречиха', 'Соя', 'Овёс', 'Пшеница', 'Рожь'],
           datasets: [{
                label: 'Top Diseases',
                data: [10, 30, 20, 20, 20],

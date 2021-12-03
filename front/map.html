@@ -61,22 +61,25 @@
                         <li class="">
                             <a class="has-arrow" href="#"><i class="flaticon-patient"></i> Точки приёма</a>
                             <ul>
-                                <li><a href="map.html">Элеватор 2547</a></li>
-                                <li><a href="map.html">Элеватор 3-47</a></li>
-                                <li><a href="map.html">Элеватор 154</a></li>
+                                <li><a href="map.html?id=1">Элеватор 2547</a></li>
+                                <li><a href="map.html?id=2">Элеватор 3-47</a></li>
+                                <li><a href="map.html?id=3">Элеватор 154</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="providers.html"><i class="flaticon-scissors"></i> Поставки</a>
+                            <a href="providers.html"><img src="assets/images/icons/Cart1.svg"/> Поставки</a>
                         </li>
                         <li>
-                            <a style="pointer-events: none;" href="operation.html"><i class="flaticon-scissors"></i> Трекинг</a>
+                            <a style="pointer-events: none;" href="operation.html"><img src="assets/images/icons/Sending.svg"/>
+                                Трекинг</a>
                         </li>
                         <li>
-                            <a style="pointer-events: none;" href="reports.html"><i class="flaticon-financial"></i> Отчеты</a>
+                            <a style="pointer-events: none;" href="reports.html"><i class="flaticon-financial"></i>
+                                Отчеты</a>
                         </li>
                         <li>
-                            <a style="pointer-events: none;" href="accounts.html"><i class="flaticon-user"></i> Сотрудники</a>
+                            <a style="pointer-events: none;" href="accounts.html"><i class="flaticon-user"></i>
+                                Сотрудники</a>
                         </li>
                     </ul>
                 </nav>
@@ -155,14 +158,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="patient-list" style="position: relative; height: 500px;">
-                            <div id="map" class="map"></div>
-                        </div>
                         <div class="accounts-area  mt-10">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <p class="shoing-reselt m-0">Элеватор 2547</p>
-                                    <p>Москвовская обл., г. Строгино,
+                                    <p id="providerID" class="shoing-reselt m-0">Элеватор 2547</p>
+                                    <p id="providerAddress">Москвовская обл., г. Строгино,
                                         ул. Каменомостская, 100</p>
                                     <p>+7 490 777 00 96<br />
                                         +7 490 777 00 96
@@ -226,6 +226,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="patient-list" style="position: relative; height: 500px;">
+                            <div id="map" class="map"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -250,56 +254,106 @@
             center: [37.6156, 55.7522],
             zoom: 9,
         });
-
+        const data = [
+            {
+                id: "1",
+                name: "Элеватор 2547",
+                address: `Москвовская обл., г. Строгино,
+                                        ул. Каменомостская, 100`,
+                'coordinates': [37.751502,
+                    55.652695,
+                ]
+            },
+            {
+                id: "2",
+                name: "Элеватор 3-47",
+                address: `Москвовская обл., г. Строгино,
+                                        ул. Каменомостская, 300`,
+                'coordinates': [37.612592, 55.821154]
+            },
+            {
+                id: "3",
+                name: "Элеватор 154",
+                address: `Москвовская обл., г. Строгино,
+                                        ул. Каменомостская, 200`,
+                'coordinates': [37.595584, 55.759354]
+            }
+        ]
+        const id = window.location.search.substring(4);
+        
+        const withoutData = data.filter(v => v.id !== id)
+        const currentData = data.find(v => v.id === id)
+        if (id) {
+            
+            const name = currentData.name;
+            const address = currentData.address;
+            $("#providerID").html(`<strong>${name}</strong>`);
+            $("#providerAddress").text(address)
+        }
         map.on('load', () => {
             // Add an image to use as a custom marker
-            map.loadImage(
-                'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+            id && map.loadImage(
+                'assets/images/custom_marker.png',
                 (error, image) => {
                     if (error) throw error;
                     map.addImage('custom-marker', image);
+                    // Add a GeoJSON source with 2 points
+                    map.addSource('pointsCurrent', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [currentData].map(i => ({
+                                'type': 'Feature',
+                                'geometry': {
+                                    'type': 'Point',
+                                    'coordinates': i.coordinates,
+                                },
+                                'properties': {
+                                    'title': i.name
+                                }
+                            }))
+                        }
+                    });
+
+                    // Add a symbol layer
+                    map.addLayer({
+                        'id': 'pointsCurrent',
+                        'type': 'symbol',
+                        'source': 'pointsCurrent',
+                        'layout': {
+                            'icon-image': 'custom-marker',
+                            // get the title name from the source's "title" property
+                            'text-field': ['get', 'title'],
+                            'text-font': [
+                                'Open Sans Semibold',
+                                'Arial Unicode MS Bold'
+                            ],
+                            'text-offset': [0, 1.25],
+                            'text-anchor': 'top'
+                        }
+                    });
+                }
+            );
+            map.loadImage(
+                'assets/images/custom_marker1.png',
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('custom-marker1', image);
                     // Add a GeoJSON source with 2 points
                     map.addSource('points', {
                         'type': 'geojson',
                         'data': {
                             'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    // feature for Mapbox DC
-                                    'type': 'Feature',
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [37.751502,
-                                        55.652695,
-                                        ]
-                                    },
-                                    'properties': {
-                                        'title': 'Элеватор 2547'
-                                    }
+                            'features': withoutData.map(i => ({
+                                'type': 'Feature',
+                                'geometry': {
+                                    'type': 'Point',
+                                    'coordinates': i.coordinates,
                                 },
-                                {
-                                    // feature for Mapbox SF
-                                    'type': 'Feature',
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [37.612592,55.821154]
-                                    },
-                                    'properties': {
-                                        'title': 'Элеватор 154'
-                                    }
-                                },
-                                {
-                                    // feature for Mapbox SF
-                                    'type': 'Feature',
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [37.595584,55.759354]
-                                    },
-                                    'properties': {
-                                        'title': 'Элеватор 3-47'
-                                    }
+                                'properties': {
+                                    'title': i.name
                                 }
-                            ]
+                            }))
                         }
                     });
 
@@ -309,7 +363,7 @@
                         'type': 'symbol',
                         'source': 'points',
                         'layout': {
-                            'icon-image': 'custom-marker',
+                            'icon-image': 'custom-marker1',
                             // get the title name from the source's "title" property
                             'text-field': ['get', 'title'],
                             'text-font': [
