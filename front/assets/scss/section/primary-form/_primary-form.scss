@@ -123,12 +123,13 @@
           line-height: 6rem;
           padding: 0;
           border-radius: 1rem;
-          background: #FF8F6B;
+          background: var(--primary-color);
           font-size: 1.8rem;
           font-weight: 600;
           text-transform: capitalize;
           color: var(--white);
           transition: $transition;
+          margin-bottom: 30px;
           &:hover {
                color: var(--white);
                background: var(--primary-color);
