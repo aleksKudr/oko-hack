@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request
-from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 import datetime, os, io
@@ -10,10 +9,12 @@ import datetime, os, io
 import base64
 import PIL.Image as Image
 
+from flask_cors import CORS
 import sql_oko
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 app.config['UPLOAD_FOLDER'] = "/root/OKO/uploads/"
 app.config['MAX_CONTENT_PATH'] = 1024*1024*1024*1024

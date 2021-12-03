@@ -64,10 +64,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="patient-list.html"><i class="flaticon-scissors"></i> Поставки</a>
+                            <a href="providers.html"><i class="flaticon-scissors"></i> Поставки</a>
                         </li>
                         <li>
-                            <a href="operation.html"><i class="flaticon-scissors"></i> Трекинг</a>
+                            <a hidden href="operation.html"><i class="flaticon-scissors"></i> Трекинг</a>
                         </li>
                         <li>
                             <a href="reports.html"><i class="flaticon-financial"></i> Отчеты</a>
@@ -136,8 +136,90 @@
                     </div>
                 </div>
             </div>
-            <div class="page-wrape" style="position: relative;">
-                <div id="map" class="map"></div>
+            <div class="page-wrape">
+                <div class="patient-list-area">
+                    <div class="container-fluid">
+                        <div class="section-header">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <div class="section-title">
+                                        <h2 class="title">Карта пунктов приема</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="patient-list"  style="position: relative; height: 500px;">
+                            <div id="map" class="map"></div>
+                        </div>
+                        <div class="accounts-area  mt-10">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="shoing-reselt m-0">Элеватор АОЗТ</p>
+                                    <p>Москвовская обл., г. Строгино, 
+                                        ул. Каменомостская, 100</p>
+                                    <p>+7 490 777 00 96<br/>
+                                        +7 490 777 00 96
+                                    </p>
+                                    <p>simple@ooooko.ru</p>
+                                </div>
+                                <div class="col-sm-8 text-left text-sm-right">
+                                    <div class="account-slide">
+                                        <div class="single-accounts">
+                                            <div class="media align-items-center">
+                                                <div class="accounts-icon bg-one">
+                                                    <img src="assets/images/icons/gruzovik.svg" alt="Patient" />
+                                                </div>
+                                                <div class="media-body">
+                                                  <p class="m-0">Грузов в пути</p>
+                                                  <h3><span class="counter">10</span></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single-accounts">
+                                            <div class="media align-items-center">
+                                                <div class="accounts-icon bg-two">
+                                                    <img src="assets/images/icons/check.svg" alt="Patient" />
+                                                </div>
+                                                <div class="media-body">
+                                                  <p class="m-0">На проверке</p>
+                                                  <h3><span class="counter">2</span></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single-accounts">
+                                            <div class="media align-items-center">
+                                                <div class="accounts-icon bg-three">
+                                                    <img src="assets/images/icons/Loader.svg" alt="Patient" />
+                                                </div>
+                                                <div class="media-body">
+                                                  <p class="m-0">На разгрузке</p>
+                                                  <h3><span class="counter">10</span></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single-accounts">
+                                            <div class="media align-items-center">
+                                                <div class="accounts-icon bg-four">
+                                                    <img src="assets/images/icons/Box.svg" alt="Patient" />
+                                                </div>
+                                                <div class="media-body">
+                                                  <p class="m-0">На хранении</p>
+                                                  <h3><span class="counter">25</span></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <div>
+                                        <p>Бригадир смены: <strong>Киркоров Иван Дмитриевич</strong></p>
+                                        <a href="providers.html" class="filter-btn"> Подробнее </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
