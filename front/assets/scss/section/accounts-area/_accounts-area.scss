@@ -1,0 +1,64 @@
+/*-------------------------
+21.accounts-area
+--------------------------*/
+.accounts-area {
+     .slick-slide {
+          margin: 0 15px;
+     }
+     .slick-list {
+          margin: 0px -15px 0px -15px;
+     }
+     .single-accounts {
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+          border: 1px solid #E0E7FE;
+          box-sizing: border-box;
+          border-radius: 30px;
+          padding: 2.5rem;
+          .accounts-icon {
+               @include flex-position(flex, center, center);
+               width: 6rem;
+               height: 6rem;
+               background: #00ade22c;
+               border-radius: 50%;
+               margin-right: 2rem;
+               &.bg-two {
+                    background: #ff88332d;
+               }
+               &.bg-three {
+                    background: #5dd97227;
+               }
+               &.bg-four {
+                    background: #D9D9D9;
+               }
+          }
+          p {
+               font-size: 1.6rem;
+               font-weight: 500;
+               color: #70708C;
+          }
+          h3 {
+               margin: 0;
+               font-size: 2.6rem;
+               font-weight: 900;
+               color: #292968;
+          }
+     }
+}
+@media (max-width:1300px) {
+     .accounts-area .single-accounts .accounts-icon {
+          width: 4.5rem;
+          height: 4.5rem;
+          margin-right: 1rem;
+     }
+     .accounts-area .single-accounts p {
+          font-size: 1.2rem
+     }
+     .accounts-area .single-accounts h3 {
+          font-size: 2rem
+     }
+}
+@media (max-width: 1199px) {
+     .accounts-area .single-accounts {
+          padding: 2rem 1.5rem;
+     }
+}
